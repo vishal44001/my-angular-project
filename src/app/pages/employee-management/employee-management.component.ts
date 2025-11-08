@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { EmployeeService } from '../../services/employee.service';
 import { EmployeeDialogComponent } from './employee-dialog.component';
 import { DeleteConfirmDialogComponent } from './delete-confirm-dialog.component';
-
+import { ToastrService } from 'ngx-toastr';
 interface Employee {
   id: string;
   name: string;
@@ -39,7 +39,7 @@ export class EmployeeManagementComponent implements OnInit {
   formModel: Partial<Employee> = {};
   editingId: string | null = null;
 
-  constructor(private dialog: MatDialog, private employeeService: EmployeeService) {}
+  constructor(private dialog: MatDialog, private employeeService: EmployeeService,private toaster:ToastrService) {}
 
   ngOnInit(): void {
     this.load();
@@ -109,11 +109,14 @@ export class EmployeeManagementComponent implements OnInit {
             this.employees.unshift(saved || newEmp);
             this.save();
             this.applyFilters();
+            // show toaster success
+            this.toaster.success(`${(saved || newEmp).name} added`, 'Employee added');
           },
           error: () => {
             this.employees.unshift(newEmp);
             this.save();
             this.applyFilters();
+            this.toaster.error('Failed to add employee — saved locally', 'Add failed');
           }
         });
       }
@@ -137,12 +140,15 @@ export class EmployeeManagementComponent implements OnInit {
               this.employees[idx] = saved || updated;
               this.save();
               this.applyFilters();
+              // toaster success
+              this.toaster.success(`${(saved || updated).name} updated`, 'Employee updated');
             },
             error: () => {
               // fallback: update locally
               this.employees[idx] = updated;
               this.save();
               this.applyFilters();
+              this.toaster.error('Failed to update employee — changes saved locally', 'Update failed');
             }
           });
         }
@@ -173,12 +179,14 @@ export class EmployeeManagementComponent implements OnInit {
           this.employees = this.employees.filter(e => e.id !== id);
           this.save();
           this.applyFilters();
+          this.toaster.success(`${name || 'Employee'} deleted`, 'Employee deleted');
         },
         error: () => {
           // server failed - remove locally anyway
           this.employees = this.employees.filter(e => e.id !== id);
           this.save();
           this.applyFilters();
+          this.toaster.error(`Failed to delete ${name || 'employee'} on server — removed locally`, 'Delete failed');
         }
       });
     });

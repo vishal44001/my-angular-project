@@ -53,12 +53,12 @@
   ],
   "employees": [
     {
-      "id": "e_wvhgn9c",
-      "name": "Ram",
+      "id": "e_zc6wx06",
+      "name": "data ",
       "role": "HR Manager",
       "department": "HR",
       "joiningDate": "2025-11-08",
-      "status": "Active"
+      "status": "Inactive"
     }
   ]
 }

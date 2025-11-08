@@ -1,5 +1,6 @@
 import { ApplicationConfig, provideZoneChangeDetection, importProvidersFrom } from '@angular/core';
 import { provideRouter } from '@angular/router';
+import { ToastrModule } from 'ngx-toastr';
 import { provideAnimations } from '@angular/platform-browser/animations';
 
 import { routes } from './app.routes';
@@ -13,6 +14,13 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideClientHydration(withEventReplay()),
     // ensure HttpClient is available application-wide for services providedIn: 'root'
-    importProvidersFrom(HttpClientModule)
+    importProvidersFrom(HttpClientModule),
+    // provide ToastrModule globally with sane defaults
+    importProvidersFrom(ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      timeOut: 4000,
+      preventDuplicates: true
+    }))
   ]
 };
