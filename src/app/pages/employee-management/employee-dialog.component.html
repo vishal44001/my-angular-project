@@ -1,0 +1,55 @@
+<h1 mat-dialog-title class="dialog-title">Add New Employee</h1>
+
+<div mat-dialog-content class="dialog-content">
+  <form #form="ngForm">
+    <mat-form-field appearance="outline">
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="data.name" name="name" required #nameCtrl="ngModel" />
+      <mat-error *ngIf="nameCtrl.invalid && (nameCtrl.touched || form.submitted)">Name is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Role</mat-label>
+      <mat-select [(ngModel)]="data.role" name="role" required #roleCtrl="ngModel">
+        <mat-option value="Product Manager">Product Manager</mat-option>
+        <mat-option value="HR Manager">HR Manager</mat-option>
+        <mat-option value="Designer">Designer</mat-option>
+      </mat-select>
+      <mat-error *ngIf="roleCtrl.invalid && (roleCtrl.touched || form.submitted)">Role is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Department</mat-label>
+      <mat-select [(ngModel)]="data.department" name="department" required #deptCtrl="ngModel">
+        <mat-option value="Product">Product</mat-option>
+        <mat-option value="HR">HR</mat-option>
+        <mat-option value="Engineering">Engineering</mat-option>
+      </mat-select>
+      <mat-error *ngIf="deptCtrl.invalid && (deptCtrl.touched || form.submitted)">Department is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Status</mat-label>
+      <mat-select [(ngModel)]="data.status" name="status" required #statusCtrl="ngModel">
+        <mat-option value="Active">Active</mat-option>
+        <mat-option value="Inactive">Inactive</mat-option>
+        <mat-option value="On Leave">On Leave</mat-option>
+      </mat-select>
+      <mat-error *ngIf="statusCtrl.invalid && (statusCtrl.touched || form.submitted)">Status is required</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Joining Date</mat-label>
+      <input matInput type="date" [(ngModel)]="data.joiningDate" name="joiningDate" />
+    </mat-form-field>
+  </form>
+</div>
+
+<div mat-dialog-actions align="end" class="dialog-actions">
+  <button mat-flat-button color="primary" [mat-dialog-close]="data" [disabled]="form.invalid" class="btn-primary">
+    Add Employee
+  </button>
+  <button mat-stroked-button (click)="onCancel()" class="btn-cancel">
+    Cancel
+  </button>
+</div>

@@ -1,0 +1,76 @@
+<div class="employee-page">
+  <div class="employee-toolbar">
+    <div class="toolbar-header">
+      <div>
+        <h1 class="page-title">Employee Management</h1>
+        <p class="subtitle">Manage your team members and their information</p>
+      </div>
+      <button (click)="startAdd()" class="btn primary add-employee-btn">+ Add Employee</button>
+    </div>
+
+    <div class="filter-container">
+      <div class="filters">
+        <div class="search-box">
+          <span class="search-icon"></span>
+          <input type="text" placeholder="Search employees..." [(ngModel)]="search" (input)="applyFilters()" />
+        </div>
+
+        <select [(ngModel)]="filterDept" (change)="applyFilters()">
+          <option value="">All Departments</option>
+          <ng-container *ngFor="let d of uniqueDepartments()">
+            <option *ngIf="d" [value]="d">{{ d }}</option>
+          </ng-container>
+        </select>
+
+        <select [(ngModel)]="filterRole" (change)="applyFilters()">
+          <option value="">All Roles</option>
+          <ng-container *ngFor="let r of uniqueRoles()">
+            <option *ngIf="r" [value]="r">{{ r }}</option>
+          </ng-container>
+        </select>
+
+        <select [(ngModel)]="filterStatus" (change)="applyFilters()">
+          <option value="">All Status</option>
+          <option value="Active">Active</option>
+          <option value="Inactive">Inactive</option>
+          <option value="On Leave">On Leave</option>
+        </select>
+      </div>
+    </div>
+  </div>
+
+  <div class="grid">
+    <table class="employee-table">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Role</th>
+          <th>Department</th>
+          <th>Status</th>
+          <th>Joining Date</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let e of filteredEmployees">
+          <td>{{ e.name }}</td>
+          <td>{{ e.role }}</td>
+          <td>{{ e.department }}</td>
+          <td>
+            <span class="status" [ngClass]="e.status.toLowerCase()">{{ e.status }}</span>
+          </td>
+          <td>
+            <span class="date">{{ e.joiningDate }}</span>
+          </td>
+          <td class="actions">
+            <button (click)="startEdit(e)" class="btn icon edit" title="Edit"></button>
+            <button (click)="deleteEmployee(e.id)" class="btn icon delete" title="Delete"></button>
+          </td>
+        </tr>
+        <tr *ngIf="filteredEmployees.length === 0">
+          <td colspan="6" class="no-data">No employees found.</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

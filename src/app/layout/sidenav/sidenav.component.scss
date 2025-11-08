@@ -1,0 +1,34 @@
+.sidenav-container { height: 100vh; }
+
+.sidenav {
+	width: 280px;
+	padding: 20px 12px;
+	background: linear-gradient(180deg,#071226 0%, #0b1724 100%);
+	color: #cbd5e1;
+}
+
+.sidenav-inner { display:flex; flex-direction:column; height:100%; }
+
+.brand-row { display:flex; align-items:center; gap:12px; padding:8px 6px 18px 6px; border-bottom: 1px solid rgba(255,255,255,0.04) }
+.avatar { width:44px; height:44px; border-radius:10px; background: linear-gradient(180deg,#2f80f6,#1e63d6); color:white; display:inline-flex; align-items:center; justify-content:center; font-weight:700; font-size:20px }
+.brand-text { color: #9fc3ff; font-weight:700; font-size:16px }
+.collapse-btn { margin-left:auto; color: rgba(255,255,255,0.7) }
+
+.nav-list { margin-top:20px; display:flex; flex-direction:column; gap:14px }
+.nav-item { display:flex; align-items:center; gap:14px; padding:14px 12px; border-radius:12px; text-decoration:none; color:rgba(255,255,255,0.85); transition: transform .08s ease, box-shadow .12s ease }
+.nav-icon { width:44px; height:44px; display:inline-flex; align-items:center; justify-content:center; border-radius:10px; background: transparent; color: rgba(255,255,255,0.9); font-size:20px }
+.nav-label { font-size:15px }
+
+.nav-item:hover { transform: translateY(-2px) }
+
+/* active item: large blue pill with glow */
+.nav-item.active {
+	background: linear-gradient(90deg,#2f6df6,#2aa0ff);
+	color: #fff !important;
+	box-shadow: 0 12px 36px rgba(42,160,255,0.22), 0 6px 18px rgba(20,60,120,0.16);
+}
+.nav-item.active .nav-icon { background: rgba(255,255,255,0.12); color: #fff }
+
+mat-sidenav-content { padding: 18px; transition: margin-left 0.28s ease }
+mat-sidenav-content.expanded { margin-left: 280px }
+mat-sidenav-content:not(.expanded) { margin-left: 80px }

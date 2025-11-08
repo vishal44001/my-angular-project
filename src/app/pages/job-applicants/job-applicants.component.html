@@ -1,0 +1,69 @@
+<div class="applicants-root">
+	<div class="header-row">
+		<!-- <h2>Job Applications</h2> -->
+		<div class="actions">
+			<mat-form-field appearance="outline" class="filter">
+				<mat-label>Role Category</mat-label>
+				<mat-select [(ngModel)]="filterRoleCategory" (selectionChange)="applyFilters()">
+					<mat-option value="">All</mat-option>
+					<mat-option *ngFor="let c of uniqueRoleCategories()" [value]="c">{{ c }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="filter">
+				<mat-label>Status</mat-label>
+				<mat-select [(ngModel)]="filterStatus" (selectionChange)="applyFilters()">
+					<mat-option value="">All</mat-option>
+					<mat-option *ngFor="let s of uniqueStatuses()" [value]="s">{{ s }}</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="search">
+				<mat-label>Search</mat-label>
+				<input matInput placeholder="Name, role or email" [(ngModel)]="search" (input)="applyFilters()" />
+			</mat-form-field>
+
+			<mat-form-field appearance="outline" class="sort">
+				<mat-label>Sort</mat-label>
+				<mat-select [(ngModel)]="sortBy" (selectionChange)="applyFilters()">
+					<mat-option value="newest">Newest</mat-option>
+					<mat-option value="oldest">Oldest</mat-option>
+					<mat-option value="name">Name</mat-option>
+				</mat-select>
+			</mat-form-field>
+
+			<button mat-stroked-button (click)="clearFilters()">Clear</button>
+		</div>
+	</div>
+
+	<div class="list">
+		<div *ngIf="filtered.length === 0" class="empty">No applications found</div>
+
+			<div *ngFor="let a of filtered" class="app-card">
+				<div class="left">
+					<div class="avatar">{{ getInitials(a.name) }}</div>
+					<div class="info">
+						<div class="name">{{ a.name }}</div>
+						<div class="meta">{{ a.roleCategory }} • {{ a.appliedRole }}</div>
+						<div class="meta small">
+							<span class="meta-item"><mat-icon aria-hidden="true">calendar_today</mat-icon> {{ a.appliedDate }}</span>
+							<span class="meta-item"><mat-icon aria-hidden="true">mail_outline</mat-icon> {{ a.email }}</span>
+							<span class="meta-item" *ngIf="a.phone"><mat-icon aria-hidden="true">phone</mat-icon> {{ a.phone }}</span>
+						</div>
+					</div>
+				</div>
+
+				<div class="right">
+					<div class="status-line">Status: <span class="status-pill" [ngClass]="a.status.toLowerCase()">{{ a.status }}</span></div>
+					<div class="change-row">
+						<label class="change-label">Change status</label>
+						<mat-form-field appearance="outline" class="status-select">
+							<mat-select [(ngModel)]="a.status" (selectionChange)="updateStatus(a, $event.value)">
+								<mat-option *ngFor="let s of uniqueStatuses()" [value]="s">{{ s }}</mat-option>
+							</mat-select>
+						</mat-form-field>
+					</div>
+				</div>
+			</div>
+	</div>
+</div>

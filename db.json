@@ -1,0 +1,64 @@
+{
+  "applicants": [
+    {
+      "id": "a_1",
+      "name": "Alex Johnson",
+      "email": "alex.j@example.com",
+      "phone": "555-9988",
+      "roleCategory": "Frontend Dev",
+      "appliedRole": "React Developer",
+      "status": "Rejected",
+      "appliedDate": "2024-10-15"
+    },
+    {
+      "id": "a_2",
+      "name": "Maya Patel",
+      "email": "maya.p@example.com",
+      "phone": "555-7766",
+      "roleCategory": "UX Designer",
+      "appliedRole": "Product Designer",
+      "status": "Shortlisted",
+      "appliedDate": "2024-10-10"
+    },
+    {
+      "id": "a_3",
+      "name": "Sam Taylor",
+      "email": "sam@example.com",
+      "phone": "555-1212",
+      "roleCategory": "Frontend Dev",
+      "appliedRole": "Angular Developer",
+      "status": "Shortlisted",
+      "appliedDate": "2024-10-01"
+    },
+    {
+      "id": "a_4",
+      "name": "Lee Wong",
+      "email": "lee@example.com",
+      "phone": "555-1414",
+      "roleCategory": "Tester",
+      "appliedRole": "QA Engineer",
+      "status": "Rejected",
+      "appliedDate": "2024-09-25"
+    },
+    {
+      "id": "a_5",
+      "name": "Rita Gomez",
+      "email": "rita@example.com",
+      "phone": "555-1313",
+      "roleCategory": "Backend Dev",
+      "appliedRole": "Node.js Developer",
+      "status": "Shortlisted",
+      "appliedDate": "2024-09-20"
+    }
+  ],
+  "employees": [
+    {
+      "id": "e_wvhgn9c",
+      "name": "Ram",
+      "role": "HR Manager",
+      "department": "HR",
+      "joiningDate": "2025-11-08",
+      "status": "Active"
+    }
+  ]
+}

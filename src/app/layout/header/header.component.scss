@@ -1,0 +1,21 @@
+:host {
+	display: block;
+}
+
+.app-toolbar {
+	position: sticky;
+	top: 0;
+	z-index: 10;
+}
+
+.title {
+	font-weight: 600;
+}
+
+.spacer {
+	flex: 1 1 auto;
+}
+
+.menu-button {
+	margin-right: 8px;
+}

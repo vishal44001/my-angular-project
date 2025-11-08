@@ -1,0 +1,22 @@
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav #sidenav mode="side" [opened]="isExpanded" class="sidenav" [class.expanded]="isExpanded">
+    <div class="sidenav-inner">
+      <div class="brand-row">
+        <div class="avatar">H</div>
+        <div class="brand-text" *ngIf="isExpanded">HR Portal</div>
+      </div>
+
+      <nav class="nav-list">
+        <a class="nav-item" *ngFor="let item of menuItems" [routerLink]="item.path" routerLinkActive="active" [routerLinkActiveOptions]="{ exact: true }">
+          <div class="nav-icon"><mat-icon>{{ item.icon }}</mat-icon></div>
+          <div class="nav-label" *ngIf="isExpanded">{{ item.label }}</div>
+        </a>
+      </nav>
+
+    </div>
+  </mat-sidenav>
+
+  <mat-sidenav-content [class.expanded]="isExpanded">
+    <ng-content></ng-content>
+  </mat-sidenav-content>
+</mat-sidenav-container>

@@ -1,0 +1,138 @@
+<div class="dashboard-root">
+	<div class="cards">
+		<mat-card class="stat-card people">
+			<div class="stat-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M16 11c1.657 0 3-1.567 3-3.5S17.657 4 16 4s-3 1.567-3 3.5S14.343 11 16 11zM8 11c1.657 0 3-1.567 3-3.5S9.657 4 8 4 5 5.567 5 7.5 6.343 11 8 11z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M2 20c0-2.5 3.582-4.5 8-4.5s8 2 8 4.5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</div>
+			<div class="stat-value">{{ totalEmployees }}</div>
+			<div class="stat-label">Total Employees</div>
+		</mat-card>
+
+		<mat-card class="stat-card applicants">
+			<div class="stat-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+					<path d="M6 20v-1c0-2.2 2.686-4 6-4s6 1.8 6 4v1" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</div>
+			<div class="stat-value">{{ totalApplicants }}</div>
+			<div class="stat-label">Total Applicants</div>
+		</mat-card>
+
+		<mat-card class="stat-card depts">
+			<div class="stat-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<rect x="3" y="3" width="7" height="7" rx="1.5" stroke="#fff" stroke-width="1.5"/>
+					<rect x="14" y="3" width="7" height="7" rx="1.5" stroke="#fff" stroke-width="1.5"/>
+					<rect x="3" y="14" width="7" height="7" rx="1.5" stroke="#fff" stroke-width="1.5"/>
+				</svg>
+			</div>
+			<div class="stat-value">{{ departmentCount }}</div>
+			<div class="stat-label">Departments</div>
+		</mat-card>
+
+		<mat-card class="stat-card roles">
+			<div class="stat-icon">
+				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+					<path d="M12 7v10" stroke="#fff" stroke-width="1.5" stroke-linecap="round"/>
+					<path d="M7 7h10v4H7z" stroke="#fff" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+				</svg>
+			</div>
+			<div class="stat-value">{{ activeJobRoles }}</div>
+			<div class="stat-label">Active Job Roles</div>
+		</mat-card>
+	</div>
+
+	<div class="main">
+		<section class="chart">
+			<h3>Employees by Department</h3>
+			<div *ngIf="deptCounts.length === 0" class="empty">No department data</div>
+			<div *ngIf="deptCounts.length > 0" class="bar-chart">
+				<div *ngFor="let d of deptCounts" class="bar-row">
+					<div class="bar-label">{{ d.dept }}</div>
+					<div class="bar-wrap">
+						<div class="bar-track">
+							<div class="left-block" [ngStyle]="{ 'background': deptGradient(d.dept) }"></div>
+							<div class="bar-progress" [style.width.%]="(d.count / (totalEmployees || 1)) * 100">
+								<span class="bar-count">{{ d.count }}</span>
+							</div>
+							<div class="bar-badge" [ngStyle]="{ 'background': deptGradient(d.dept) }">{{ d.count }}</div>
+						</div>
+					</div>
+				</div>
+				<div class="chart-legend">
+				<span class="legend-item"><span class="dot dot-dta"></span>All Roles</span>
+					<span class="legend-item"><span class="dot dot-dta"></span> DTA</span>
+					<span class="legend-item"><span class="dot dot-product"></span> Product</span>
+					<span class="legend-item"><span class="dot dot-hr"></span> HR</span>
+				</div>
+			</div>
+		</section>
+
+		<section class="list">
+			<div class="filters">
+				<mat-form-field appearance="outline" class="filter">
+					<mat-label>Department</mat-label>
+					<mat-select [(ngModel)]="filterDept" (selectionChange)="applyFilters()">
+											<mat-option value="">All</mat-option>
+											<ng-container *ngFor="let d of uniqueDepartments()">
+												<mat-option *ngIf="d" [value]="d">{{ d }}</mat-option>
+											</ng-container>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" class="filter">
+					<mat-label>Role</mat-label>
+					<mat-select [(ngModel)]="filterRole" (selectionChange)="applyFilters()">
+											<mat-option value="">All</mat-option>
+													<ng-container *ngFor="let r of uniqueRoles()">
+														<mat-option *ngIf="r" [value]="r">{{ r }}</mat-option>
+													</ng-container>
+					</mat-select>
+				</mat-form-field>
+
+				<mat-form-field appearance="outline" class="filter search">
+					<mat-label>Search</mat-label>
+					<input matInput placeholder="Name or role" [(ngModel)]="search" (input)="applyFilters()" />
+				</mat-form-field>
+
+				<button mat-stroked-button color="primary" (click)="clearFilters()">Clear</button>
+			</div>
+
+			<div class="table-wrap">
+				<table class="simple-table">
+					<thead>
+						<tr>
+							<th>Name</th>
+							<th>Role</th>
+							<th>Department</th>
+							<th>Status</th>
+							<th>Joining</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr *ngFor="let e of tableData">
+							<td class="name-cell">
+								<div class="avatar">{{ getInitials(e.name) }}</div>
+								<div class="person">
+									<div class="person-name">{{ e.name }}</div>
+									<div class="person-email">{{ e.role }}</div>
+								</div>
+							</td>
+							<td>{{ e.role }}</td>
+							<td><span class="dept-pill">{{ e.department }}</span></td>
+							<td><span class="status-pill" [ngClass]="e.status.toLowerCase().replace(' ','-')">{{ e.status }}</span></td>
+							<td>{{ e.joiningDate }}</td>
+						</tr>
+						<tr *ngIf="tableData.length === 0">
+							<td colspan="5" class="empty">No employees match</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</section>
+	</div>
+</div>

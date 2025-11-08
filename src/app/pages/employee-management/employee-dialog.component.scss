@@ -1,0 +1,94 @@
+/* Dialog Title */
+.dialog-title {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 1rem;
+}
+
+/* Content Layout */
+.dialog-content {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+  padding-top: 0.5rem;
+}
+
+/* Input & Select Field Styles */
+mat-form-field {
+  width: 100%;
+}
+
+.mat-mdc-text-field-wrapper {
+  background-color: #f9fafb !important;
+  border: 1px solid #d1d5db !important;
+  border-radius: 10px !important;
+  padding: 0 0.5rem !important;
+  transition: all 0.2s ease-in-out;
+}
+
+.mat-mdc-text-field-wrapper:hover {
+  border-color: #9ca3af !important;
+}
+
+.mat-mdc-text-field-wrapper.mdc-text-field--focused {
+  border: 1.8px solid #2563eb !important;
+  background-color: #ffffff !important;
+}
+
+/* Placeholder & Label */
+.mat-mdc-floating-label {
+  font-size: 0.9rem !important;
+  color: #4b5563 !important;
+}
+
+/* Input Text */
+.mat-mdc-input-element {
+  font-size: 1rem !important;
+  color: #111827 !important;
+  padding: 0.6rem 0 !important;
+}
+
+/* Dropdown Arrow Fix */
+.mat-mdc-select-arrow {
+  color: #6b7280 !important;
+}
+
+/* Date Picker */
+input[type="date"]::-webkit-calendar-picker-indicator {
+  filter: invert(50%);
+  cursor: pointer;
+}
+
+/* Dialog Actions */
+.dialog-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+/* Buttons */
+.btn-primary {
+  background-color: #2563eb !important;
+  color: white !important;
+  font-weight: 600;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+  transition: background 0.2s ease-in-out;
+}
+
+.btn-primary:hover {
+  background-color: #1d4ed8 !important;
+}
+
+.btn-cancel {
+  color: #374151 !important;
+  border-color: #d1d5db !important;
+  border-radius: 8px;
+  padding: 0.6rem 1.2rem;
+}
+
+.btn-cancel:hover {
+  background-color: #f3f4f6 !important;
+}
