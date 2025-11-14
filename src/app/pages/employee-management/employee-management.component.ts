@@ -57,7 +57,7 @@ export class EmployeeManagementComponent implements OnInit {
         this.applyFilters();
       },
       error: () => {
-        const raw = localStorage.getItem(STORAGE_KEY);
+        const raw = (typeof window !== 'undefined' && window.localStorage) ? localStorage.getItem(STORAGE_KEY) : null;
         if (raw) {
           try {
             const parsed = JSON.parse(raw) as Employee[];
@@ -84,7 +84,9 @@ export class EmployeeManagementComponent implements OnInit {
   }
 
   private save(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.employees));
+    if (typeof window !== 'undefined' && window.localStorage) {
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(this.employees));
+    }
   }
 
   startAdd(): void {

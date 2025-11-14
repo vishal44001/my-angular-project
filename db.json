@@ -7,7 +7,7 @@
       "phone": "555-9988",
       "roleCategory": "Frontend Dev",
       "appliedRole": "React Developer",
-      "status": "Rejected",
+      "status": "Hired",
       "appliedDate": "2024-10-15"
     },
     {
@@ -54,11 +54,12 @@
   "employees": [
     {
       "id": "e_zc6wx06",
-      "name": "data ",
+      "name": "Vishl",
       "role": "HR Manager",
       "department": "HR",
       "joiningDate": "2025-11-08",
-      "status": "Inactive"
+      "status": "Inactive",
+      "title": "Edit Employee"
     }
   ]
 }

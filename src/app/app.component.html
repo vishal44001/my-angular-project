@@ -1,9 +1,17 @@
-<app-sidenav>
-  <app-header></app-header>
+<ng-container *ngIf="isAuthenticated; else loginOnly">
+  <app-sidenav>
+    <app-header></app-header>
 
-  <main class="app-main">
-    <router-outlet></router-outlet>
-  </main>
+    <main class="app-main">
+      <router-outlet></router-outlet>
+    </main>
 
-</app-sidenav>
+  </app-sidenav>
+</ng-container>
+
+<ng-template #loginOnly>
+  <!-- when not authenticated just render the router outlet (login page)
+       so the main app chrome (sidenav/header) is hidden -->
+  <router-outlet></router-outlet>
+</ng-template>
 

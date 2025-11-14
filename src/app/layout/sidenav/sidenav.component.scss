@@ -31,4 +31,11 @@
 
 mat-sidenav-content { padding: 18px; transition: margin-left 0.28s ease }
 mat-sidenav-content.expanded { margin-left: 280px }
+/* when not expanded on larger screens show a narrow menu, but on small screens remove horizontal offset entirely */
 mat-sidenav-content:not(.expanded) { margin-left: 80px }
+
+@media (max-width: 900px) {
+	/* in mobile / over mode we don't reserve space for sidenav */
+	mat-sidenav-content, mat-sidenav-content:not(.expanded) { margin-left: 0 !important; padding: 12px; }
+	.sidenav { width: 260px; }
+}

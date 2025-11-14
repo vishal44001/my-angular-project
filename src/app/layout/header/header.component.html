@@ -1,5 +1,5 @@
 <mat-toolbar color="primary" class="app-toolbar">
-	<button mat-icon-button class="menu-button" aria-label="Open sidenav">
+	<button mat-icon-button class="menu-button" aria-label="Open sidenav" (click)="toggleSidenav()">
 		<mat-icon>menu</mat-icon>
 	</button>
 	<span class="title">{{ appTitle }}</span>
@@ -7,7 +7,8 @@
 	<button mat-icon-button aria-label="Notifications">
 		<mat-icon>notifications</mat-icon>
 	</button>
-	<button mat-icon-button aria-label="Profile">
-		<mat-icon>account_circle</mat-icon>
+	<button mat-icon-button aria-label="Profile" (click)="onProfileClick()">
+		<img *ngIf="profile?.picture" [src]="profile.picture" class="avatar-img" alt="avatar" />
+		<mat-icon *ngIf="!profile?.picture">account_circle</mat-icon>
 	</button>
 </mat-toolbar>

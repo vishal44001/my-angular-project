@@ -76,9 +76,9 @@ export class DashboardComponent implements OnInit {
         this.applyFilters();
       },
       error: () => {
-        // fallback: load from localStorage
+        // fallback: load from localStorage (guarded for SSR)
         try {
-          const raw = localStorage.getItem(EMP_KEY);
+          const raw = (typeof window !== 'undefined' && window.localStorage) ? localStorage.getItem(EMP_KEY) : null;
           this.employees = raw ? JSON.parse(raw) as Employee[] : [];
         } catch {
           this.employees = [];
@@ -102,7 +102,7 @@ export class DashboardComponent implements OnInit {
       },
       error: () => {
         try {
-          const raw2 = localStorage.getItem(APPLICANTS_KEY);
+          const raw2 = (typeof window !== 'undefined' && window.localStorage) ? localStorage.getItem(APPLICANTS_KEY) : null;
           this.applicants = raw2 ? JSON.parse(raw2) : [];
         } catch {
           this.applicants = [];

@@ -22,6 +22,7 @@ export class ApplicantsService {
   }
 
   update(id: string, payload: any): Observable<any> {
+    
     return this.http.put<any>(`${this.base}/${id}`, payload);
   }
 
