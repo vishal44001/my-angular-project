@@ -32,6 +32,7 @@ export class LoginComponent {
       g.accounts.id.initialize({
         client_id: '621152386206-ipgjnritkuf1bck4d1ipjp0vp32jh4tv.apps.googleusercontent.com', // Replace with your actual Client ID
         callback: this.handleCredentialResponse.bind(this)
+        // '621152386206-ipgjnritkuf1bck4d1ipjp0vp32jh4tv.apps.googleusercontent.com'
       });
 
       g.accounts.id.renderButton(
